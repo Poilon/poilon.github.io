@@ -7,7 +7,7 @@ $subject 	= $_POST['subject'];
 $msg 		= $_POST['msg'];
 $output 	= "Name: ".$fname."\n\nSubject: ".$subject."\n\nMessage: ".$msg;
 
-$to 		= 'qualzz20@gmail.com';
+$to 		= 'poilonsoftware@gmail.com';
 $headers	= 'FROM: "'.$email.'"';
 
 $send = mail($to, $fname, $output."\n\n***This message has been sent from Martxa", $headers);
