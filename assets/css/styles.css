@@ -118,6 +118,7 @@ ul{
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 }
 /*---------header-area start---------*/
+
 .header-area{
   position: fixed;
   top: 0;
@@ -141,13 +142,13 @@ ul{
 }
 .mainmenu ul li a {
     color: #fff;
-    padding: 26px 0px;
+    padding: 26px 10px;
     font-weight: 600;
     text-transform: uppercase;
     display: block;
 }
 .mainmenu ul li.active > a,.mainmenu ul li:hover > a{
-  color: #228adc  ;
+  color: #228adc;
 }
 .mainmenu ul li > ul {
   position: absolute;
