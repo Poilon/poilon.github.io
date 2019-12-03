@@ -2250,7 +2250,7 @@ a.appoinment-btn:hover{
 
 
 #snackbar {
-  visibility: hidden;
+  display: none;
   min-width: 250px;
   margin-left: -125px;
   background-color: #131619;
@@ -2266,7 +2266,7 @@ a.appoinment-btn:hover{
 }
 
 #snackbar.show {
-  visibility: visible;
+  display: block;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
