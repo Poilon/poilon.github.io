@@ -83,6 +83,9 @@ ul{
 }
 .bg-1{background:#0d0f11;}
 .bg-2{background:#131619;}
+.bg-4{background: url("../../assets/images/7.1.jpg")no-repeat center center / cover;
+    align-content: center;
+}
 
 .ptb-130{padding: 130px 0px}
 .ptb-100{padding: 100px 0px}
@@ -373,7 +376,7 @@ ul{
   background: #000;
   content: "";
   height: 100%;
-  opacity: .7;
+  opacity: .1;
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
 }
 .slider-items img{
@@ -1404,6 +1407,7 @@ a#scrollUp i:before{
 /*--------work-area start--------*/
 .work-area{
   padding: 80px 0px 80px;
+    height: 800px;
   background: #0a0b0c;
 }
 .work-wrap {
@@ -2058,6 +2062,58 @@ a.appoinment-btn:hover{
   background-image:none;
   z-index:999;
 }
+.pic{
+    text-align: right;
+    border-radius: 100%;
+}
+.poilonpic{
+ text-align: right;
+    border:3px solid white;
+    border-radius: 100%;
+    width: 400px;
+    height: 400px;
+}
+/*sponsor page*/
+.work-area-sponsor{
+    background-color: #0d0f11;
+    text-align:center;
+    padding: 80px 0px 80px;
+    height: 800px;
+}
+.testimony-header{
+    text-align: center;
+    font-size: 22px;
+    color: white;
+}
+.div-wrap {
+    display: inline-flex;
+    flex-direction: row;
+}
+.pl100{
+    padding-left: 100px;
+}
+.playername{
+    font-size: 50px;
+}
+.player-description-item{
+    padding-top: 20px;
+}
+.testimony{
+    border-radius: 100%;
+    alignment: left;
+    border:3px solid white;
+
+    width: 300px;
+    height: 300px;
+}
+.testimony-txt{
+    margin-left: 0px;
+    margin-top: 30px;
+    font-size: 22px;
+    text-align: left;
+    color: white;
+}
+
 .checkout-form a.order,.checkout-form button{
   display:block;
   width:100%;
