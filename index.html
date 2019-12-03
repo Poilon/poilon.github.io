@@ -255,7 +255,10 @@
                                     <i class="fa fa-envelope"></i>
                                     Email
                                     <p style="text-transform: none">
-                                        <span  id="email" >poilonsoftware@gmail.com</span>
+                                        <span  id="email">
+                                            poilonsoftware@gmail.com
+                                        </span>
+                                        <span class='small' style="display: none;" id="toDisplay"> (Copied to clipboard !) </span>
                                     </p>
                                 </li>
                             </ul>
@@ -325,7 +328,6 @@
                 </div>
             </div>
         </footer>
-        <div id="snackbar" class="snackbar"> Copied to clipboard !</div>
         <!-- footer-area end -->
 
 		<!-- all js here -->
@@ -355,21 +357,16 @@
         <script src="assets/js/scripts.js"></script>
        
         <script>
-            function showSnackBar() {
-              var x = document.getElementById("snackbar");
-              x.className = "show";
-              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-            }
-
             function copy() {
-                var copyText = document.getElementById("email");
                 var textArea = document.createElement("textarea");
-                textArea.value = copyText.textContent;
+                textArea.value = "poilonsoftware@gmail.com";
                 document.body.appendChild(textArea);
                 textArea.select();
                 document.execCommand("Copy");
                 textArea.remove();
-                showSnackBar();
+
+                document.getElementById("toDisplay").style = "display: block;";
+
             };
 
         </script>
