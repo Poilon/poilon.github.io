@@ -247,41 +247,25 @@
                 <div class="row" style="padding-bottom: 120px;"> <div class="section-title text-center">
                                     <h2>Let's get to work</h2>
                                 </div>
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                           
-                        <div class="contact-form">
-                            <div class="cf-msg"></div>
-                            <form action="mail.php" method="post" id="cf">
-                                <div class="row">
-                                    <div class="col-md-6 col-xs-12">
-                                        <input type="text" placeholder="Name" id="fname" name="fname">
-                                    </div>
-                                    <div class="col-md-6 col-xs-12">
-                                        <input type="text" placeholder="Email" id="email" name="email">
-                                    </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <input type="text" placeholder="Subject" id="subject" name="subject">
-                                    </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <textarea class="contact-textarea" placeholder="Message" id="msg" name="msg"></textarea>
-                                    </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <button id="submit" class="cont-submit btn-contact btn-style" name="submit">SEND MESSAGE</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+
+                    <div class="col-md-4 col-sm-6 col-xs-12" onclick="copy()">
                         <div class="contact-wrap">
                             <ul>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    Email Id
+                                    Email
                                     <p style="text-transform: none">
-                                        <span>poilonsoftware@gmail.com</span>
+                                        <span  id="email" >poilonsoftware@gmail.com</span>
                                     </p>
                                 </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="contact-wrap">
+                            <ul>
                                 <li>
                                     <i class="fa fa-location-arrow"></i>
                                     Location
@@ -289,6 +273,24 @@
                                         <span>Châlons-en-Champagne - France</span>
                                     </p>
                                 </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="contact-wrap">
+                            <ul>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/paul-armand-assus-95719052" target="_blank">
+                                        <i class="fa fa-linkedin"></i>
+                                        Linkedin
+                                        <p>
+                                            <span>Paul-Armand Assus</span>
+                                        </p>
+                                    </a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -308,14 +310,14 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="copyright">
                                 <p> 
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script>Poilon Software All rights reserved
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> &nbspPoilon Software All rights reserved
                                 </p>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="socil-media-icon">
                                 <ul>
-                                    <li><a href="https://www.linkedin.com/in/paul-armand-assus-95719052"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="https://twitter.com/poilon" target="_blank"><i class="fa fa-twitter"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -323,6 +325,7 @@
                 </div>
             </div>
         </footer>
+        <div id="snackbar"> Copied to clipboard !</div>
         <!-- footer-area end -->
 
 		<!-- all js here -->
@@ -351,5 +354,25 @@
 		<!-- main js -->
         <script src="assets/js/scripts.js"></script>
        
+        <script>
+            function showSnackBar() {
+              var x = document.getElementById("snackbar");
+              x.className = "show";
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+            function copy() {
+                var copyText = document.getElementById("email");
+                var textArea = document.createElement("textarea");
+                textArea.value = copyText.textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("Copy");
+                textArea.remove();
+                showSnackBar();
+            };
+
+        </script>
+
     </body>
 </html>
