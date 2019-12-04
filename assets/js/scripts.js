@@ -159,7 +159,6 @@
 		scrollSpeed: 900,
 		animation: 'fade'
 	});
-
 	/*--
 	Magnific Popup
 	------------------------*/

@@ -18,15 +18,15 @@
 /*----------------------------------------*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,600,700,800|Open+Sans:300i,400,400i,600,700,800');
 *{
-	margin:0;
-	padding:0;
+
+    box-sizing: border-box;
 }
 body {
 	color:#fff;
 	font-family: 'Open Sans', sans-serif;
 	line-height:26px;
 	background:#fff;
-  font-weight: 400;
+    font-weight: 400;
 }
 .floatleft {float:left}
 .floatright {float:right}
@@ -117,6 +117,8 @@ ul{
   opacity: .8;
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 }
+
+
 /*---------header-area start---------*/
 
 .header-area{
@@ -2068,25 +2070,32 @@ a.appoinment-btn:hover{
     border-radius: 100%;
 }
 .poilonpic{
- text-align: right;
+    text-align: right;
     border:3px solid white;
     border-radius: 100%;
     width: 400px;
     height: 400px;
 }
 /*sponsor page*/
+
 .work-area-sponsor{
+
     background-color: #0d0f11;
     text-align:center;
     padding: 80px 0px 80px;
     height: 800px;
 }
+/*.sponsoringdiv{
+    text-align: center;
+
+}*/
 .testimony-header{
     text-align: center;
     font-size: 22px;
     color: white;
 }
 .div-wrap {
+    text-align: center;
     display: inline-flex;
     flex-direction: row;
 }
@@ -2097,13 +2106,15 @@ a.appoinment-btn:hover{
     font-size: 50px;
 }
 .player-description-item{
+    margin-bottom: 30px;
+    text-align: center;
     padding-top: 20px;
 }
 .testimony{
     border-radius: 100%;
     alignment: left;
     border:3px solid white;
-
+    text-align: center;
     width: 300px;
     height: 300px;
 }
