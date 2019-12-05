@@ -1415,8 +1415,9 @@ a#scrollUp i:before{
 }
 .work-wrap {
   margin-bottom: 30px;
-  text-align: center;
+  text-align: right;
 }
+
 .work-wrap i{
   height: 100px;
   width: 100px;
@@ -2106,9 +2107,8 @@ a.appoinment-btn:hover{
     font-size: 50px;
 }
 .player-description-item{
-    margin-bottom: 30px;
-    text-align: center;
-    padding-top: 20px;
+    text-align: right;
+    padding-top: 5px;
 }
 .testimony{
     border-radius: 100%;
