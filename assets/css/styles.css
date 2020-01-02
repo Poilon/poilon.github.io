@@ -745,7 +745,7 @@ ul{
 }
 .pricing-wrap.active .pricing-content:before{
   background: #228adc;
-} 
+}
 .pricing-content h2{
   font-weight: 700;
   font-size: 34px;
@@ -1466,7 +1466,7 @@ a#scrollUp i:before{
   color: #228adc;
 }
 .working-time-wrap ul li.weekend:before{
-  border-bottom: 1px dashed #228adc; 
+  border-bottom: 1px dashed #228adc;
 }
 /*--------working-time-area end--------*/
 .wedo-area.bg-2.wedo-area2.wedo-area3.pt-100 {
@@ -2084,17 +2084,13 @@ a.appoinment-btn:hover{
     background-color: #0d0f11;
     text-align:center;
     padding: 80px 0px 80px;
-    height: 800px;
+    height: 1250px;
 }
 /*.sponsoringdiv{
     text-align: center;
 
 }*/
-.testimony-header{
-    text-align: center;
-    font-size: 22px;
-    color: white;
-}
+
 .div-wrap {
     text-align: center;
     display: inline-flex;
@@ -2125,7 +2121,27 @@ a.appoinment-btn:hover{
     text-align: left;
     color: white;
 }
-
+.profil_trif{
+    border-radius: 100%;
+    alignment: left;
+    border:3px solid white;
+    background-image: url("../images/sponsor/trif.jpg");
+    width: 300px;
+    height: 300px;
+}
+.profil_psylo{
+    border-radius: 100%;
+    alignment: right;
+    border:3px solid white;
+    background-image: url("../images/sponsor/Psylo.jpg");
+    width: 300px;
+    height: 300px;
+    margin-bottom: 30px;
+}
+.player-description-item-psylo{
+    text-align: left;
+    padding-top: 5px;
+}
 .checkout-form a.order,.checkout-form button{
   display:block;
   width:100%;
