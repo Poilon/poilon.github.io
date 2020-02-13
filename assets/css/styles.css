@@ -2126,19 +2126,27 @@ a.appoinment-btn:hover{
     alignment: left;
     border:3px solid white;
     background-image: url("../images/sponsor/trif.jpg");
-    width: 300px;
-    height: 300px;
+    width: 270px;
+    height: 270px;
 }
-.profil_psylo{
+.profil_fiction{
     border-radius: 100%;
     alignment: right;
     border:3px solid white;
-    background-image: url("../images/sponsor/Psylo.jpg");
-    width: 300px;
-    height: 300px;
+    background-image: url("../images/sponsor/fiction.jpeg");
+    width: 270px;
+    height: 270px;
     margin-bottom: 30px;
 }
-.player-description-item-psylo{
+.profil_psylo{
+    border-radius: 100%;
+    alignment: left;
+    border:3px solid white;
+    background-image: url("../images/sponsor/Psylo.jpg");
+    width: 270px;
+    height: 270px;
+}
+.player-description-item-left{
     text-align: left;
     padding-top: 5px;
 }
