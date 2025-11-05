@@ -129,7 +129,9 @@ ul{
   left: 0;
 }
 .header-bottom {
-  border-bottom: 1px solid #228adc;
+  border-bottom: 1px solid rgba(34, 138, 220, 0.3);
+  backdrop-filter: blur(10px);
+  background: rgba(13, 15, 17, 0.9);
 }
 .logo{
   padding: 20px 0px;
@@ -420,16 +422,21 @@ ul{
 }
 .single-slider a{
   display: inline-block;
-  padding:10px 30px;
-  background: #228adc;
+  padding:12px 35px;
+  background: linear-gradient(135deg, #228adc, #1a6ba8);
   color: #fff;
   text-transform: uppercase;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 5px 20px rgba(34, 138, 220, 0.3);
+  transition: all 0.3s ease;
 }
 .single-slider a:hover{
   background: #fff;
   color: #228adc;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 .slider-active .owl-dots{
   position: absolute;
@@ -461,13 +468,18 @@ ul{
   margin-bottom: 45px;
 }
 .section-title h2{
-  font-size: 34px;
+  font-size: 38px;
   font-weight: 700;
   margin-bottom: 20px;
+  background: linear-gradient(135deg, #228adc, #1a6ba8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .section-title p{
   font-style: italic;
   font-size: 16px;
+  color: #ccc;
 }
 .about-wrap {
   padding: 60px 0px;
@@ -1409,30 +1421,51 @@ a#scrollUp i:before{
 
 /*--------work-area start--------*/
 .work-area{
-  padding: 80px 0px 80px;
-    height: 1000px;
+  padding: 80px 0px 50px;
   background: #0a0b0c;
 }
 .work-wrap {
   margin-bottom: 30px;
   text-align: center;
+  padding: 30px 20px;
+  background: #131619;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.work-wrap:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(34, 138, 220, 0.2);
 }
 
 .work-wrap i{
-  height: 100px;
-  width: 100px;
-  background: #0d0f11;
+  height: 80px;
+  width: 80px;
+  background: linear-gradient(135deg, #228adc, #1a6ba8);
   border-radius: 50%;
-  line-height: 100px;
-  font-size: 30px;
-  color: #228adc;
-  margin-bottom: 25px;
+  line-height: 80px;
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
+
+.work-wrap:hover i {
+  transform: scale(1.1);
+}
+
 .work-wrap h3{
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
   font-weight: 700;
   margin-bottom: 0px;
+}
+
+.work-wrap p {
+  color: #ccc;
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 22px;
 }
 /*--------work-area end--------*/
 
