@@ -316,25 +316,15 @@
                             </div>
                         </article>
                     </div>
-                    <form class="contact-form" action="mail.php" method="POST">
-                        <div class="form-group">
-                            <label for="fname" data-i18n="contact.form.name">Nom / Organisation</label>
-                            <input id="fname" name="fname" type="text" placeholder="Votre nom" required data-i18n-placeholder="contact.form.namePlaceholder">
+                    <div class="contact-form contact-cta">
+                        <h3 data-i18n="contact.mailto.heading">Préférez l'e-mail ?</h3>
+                        <p data-i18n="contact.mailto.desc">Un simple message suffit pour lancer la discussion, nous revenons vers vous avec une proposition rapide.</p>
+                        <div class="contact-cta-actions">
+                            <a class="btn btn-primary" href="mailto:poilonsoftware@gmail.com?subject=Projet%20Poilon" data-i18n="contact.mailto.primary">Écrire un email</a>
+                            <a class="btn btn-ghost" href="mailto:poilonsoftware@gmail.com?subject=Projet%20Poilon" data-i18n="contact.mailto.secondary">Ouvrir votre messagerie</a>
                         </div>
-                        <div class="form-group">
-                            <label for="email" data-i18n="contact.form.email">Email</label>
-                            <input id="email" name="email" type="email" placeholder="vous@entreprise.com" required data-i18n-placeholder="contact.form.emailPlaceholder">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject" data-i18n="contact.form.subject">Sujet</label>
-                            <input id="subject" name="subject" type="text" placeholder="Refonte produit, MVP, audit..." required data-i18n-placeholder="contact.form.subjectPlaceholder">
-                        </div>
-                        <div class="form-group">
-                            <label for="msg" data-i18n="contact.form.message">Message</label>
-                            <textarea id="msg" name="msg" rows="5" placeholder="Parlez-nous de votre vision, délai, budget..." required data-i18n-placeholder="contact.form.messagePlaceholder"></textarea>
-                        </div>
-                        <button class="btn btn-primary" type="submit" data-i18n="contact.form.submit">Envoyer le message</button>
-                    </form>
+                        <p class="contact-cta-note" data-i18n="contact.mailto.note">Réponse en moins de 24h ouvrées.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -459,6 +449,11 @@
                 'contact.linkedin.button': 'Ouvrir le profil',
                 'contact.location.label': 'Localisation',
                 'contact.location.desc': "Equipe remote & hybride, interventions en France et à l'international.",
+                'contact.mailto.heading': "Préférez l'email ?",
+                'contact.mailto.desc': "Un simple message suffit pour lancer la discussion, nous revenons vers vous avec une proposition rapide.",
+                'contact.mailto.primary': 'Écrire un email',
+                'contact.mailto.secondary': 'Ouvrir votre messagerie',
+                'contact.mailto.note': 'Réponse en moins de 24h ouvrées.',
                 'contact.form.name': 'Nom / Organisation',
                 'contact.form.email': 'Email',
                 'contact.form.subject': 'Sujet',
@@ -578,6 +573,11 @@
                 'contact.linkedin.button': 'Open profile',
                 'contact.location.label': 'Location',
                 'contact.location.desc': 'Remote & hybrid team, working across France and internationally.',
+                'contact.mailto.heading': 'Prefer email?',
+                'contact.mailto.desc': 'Drop us a line with some context and we will come back with a proposal within one business day.',
+                'contact.mailto.primary': 'Write an email',
+                'contact.mailto.secondary': 'Open your mail app',
+                'contact.mailto.note': 'Replies within 24h on business days.',
                 'contact.form.name': 'Name / Organization',
                 'contact.form.email': 'Email',
                 'contact.form.subject': 'Subject',

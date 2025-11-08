@@ -575,6 +575,23 @@ h6 {
     gap: 1rem;
 }
 
+.contact-cta {
+    justify-content: center;
+    text-align: left;
+}
+
+.contact-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0.5rem 0 0;
+}
+
+.contact-cta-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
