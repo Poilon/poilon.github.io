@@ -134,9 +134,6 @@
 .blog-details-area {
     padding: 100px 0px;
 }
-.contact-form textarea {
-    height: 200px;
-}
 .contact-area{
   padding-top: 100px;
 }
@@ -308,15 +305,6 @@ a#scrollUp{
 .blog-details-wrap blockquote {
     padding: 30px 10px 30px 25px;
     font-size: 15px;
-}
-.contact-form{
-    margin-bottom: 50px;
-}
-.contact-form textarea {
-    height: 150px;
-}
-.contact-wrap ul li {
-    padding: 30px 20px 30px 80px;
 }
 .contact-area{
   padding-top: 100px;
