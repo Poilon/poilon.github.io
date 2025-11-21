@@ -498,7 +498,11 @@ h6 {
 }
 
 .case-highlight {
-    margin-top: 2.5rem;
+    margin-top: 2.8rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.8rem;
 }
 
 .case-card {
@@ -512,6 +516,68 @@ h6 {
     box-shadow: 0 35px 80px rgba(2, 3, 12, 0.6);
 }
 
+.case-card--primary {
+    background: linear-gradient(145deg, rgba(14, 16, 38, 0.98), rgba(5, 8, 24, 0.96));
+    height: 100%;
+}
+
+.case-card--secondary {
+    background: linear-gradient(135deg, rgba(14, 16, 38, 0.95), rgba(4, 6, 20, 0.95));
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 30px 70px rgba(1, 4, 12, 0.38);
+    height: 100%;
+}
+
+.case-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.case-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.case-logo {
+    width: 120px;
+    height: 40px;
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.85rem;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+.case-logo--compta {
+    background: #fff;
+    border-color: rgba(0, 132, 255, 0.25);
+}
+
+.case-logo--collective {
+    background: #fff;
+    border-color: rgba(255, 173, 66, 0.25);
+}
+
+.case-logo img {
+    max-height: 42px;
+    max-width: 100%;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.18));
+}
+
 .case-meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -523,6 +589,17 @@ h6 {
     letter-spacing: 0.15em;
     font-size: 0.75rem;
     color: var(--accent);
+}
+
+.case-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.case-card .btn {
+    align-self: flex-start;
+    min-width: 0;
+    padding-inline: 1.6rem;
 }
 
 .focus-grid {
