@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Évaluation des traits du spectre autistique</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #1a2028;
+    --panel-2: #242b36;
+    --accent: #5eb3ff;
+    --accent-2: #9d7cff;
+    --text: #e8edf3;
+    --muted: #8b95a5;
+    --border: #2d3542;
+    --ok: #4ade80;
+    --warn: #fbbf24;
+    --high: #f87171;
+    --radius: 12px;
+    --shadow: 0 8px 32px rgba(0,0,0,0.35);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+    background: radial-gradient(1200px 600px at 20% -10%, #1b2740 0%, transparent 60%),
+                radial-gradient(800px 400px at 100% 100%, #241f3f 0%, transparent 60%),
+                var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 32px 16px;
+    line-height: 1.55;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-size: 1.9rem;
+    margin: 0 0 8px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle { color: var(--muted); font-size: 0.95rem; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .disclaimer {
+    background: rgba(251, 191, 36, 0.08);
+    border-left: 3px solid var(--warn);
+    padding: 14px 16px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: #e8d9a8;
+    margin: 16px 0;
+  }
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--panel-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 0.3s ease;
+    border-radius: 4px;
+  }
+  .progress-text {
+    font-size: 0.85rem;
+    color: var(--muted);
+    min-width: 80px;
+    text-align: right;
+  }
+  .dimension-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(94, 179, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .question-text {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+  .likert {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .likert-option {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .likert-option:hover {
+    border-color: var(--accent);
+    background: rgba(94, 179, 255, 0.06);
+  }
+  .likert-option.selected {
+    border-color: var(--accent);
+    background: rgba(94, 179, 255, 0.12);
+  }
+  .likert-option .dot {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    margin-right: 14px;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.15s ease;
+  }
+  .likert-option.selected .dot {
+    border-color: var(--accent);
+  }
+  .likert-option.selected .dot::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  button {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 11px 22px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-weight: 500;
+  }
+  button:hover:not(:disabled) {
+    border-color: var(--accent);
+  }
+  button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  button.primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border: none;
+    color: #fff;
+  }
+  button.primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(94, 179, 255, 0.3);
+  }
+  .demographics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 0.85rem; color: var(--muted); }
+  input, select {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .results-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .global-score {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 8px 0;
+  }
+  .tranche {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    margin: 8px 0;
+    font-size: 0.95rem;
+  }
+  .tranche.low { background: rgba(74, 222, 128, 0.15); color: var(--ok); }
+  .tranche.mid { background: rgba(251, 191, 36, 0.15); color: var(--warn); }
+  .tranche.high { background: rgba(248, 113, 113, 0.15); color: var(--high); }
+  .interpretation {
+    background: var(--panel-2);
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: #d4dae3;
+  }
+  .dimensions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .dim-card {
+    background: var(--panel-2);
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .dim-card .dim-name {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .dim-card .dim-score {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .dim-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .dim-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+  .radar-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  canvas { max-width: 100%; }
+  .hidden { display: none !important; }
+  .muted { color: var(--muted); font-size: 0.88rem; }
+  .keyboard-hint {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+  kbd {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-family: inherit;
+    font-size: 0.8rem;
+  }
+  @media (max-width: 600px) {
+    .dimensions-grid { grid-template-columns: 1fr; }
+    .demographics { grid-template-columns: 1fr; }
+    h1 { font-size: 1.5rem; }
+    .panel { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Évaluation des traits du spectre autistique</h1>
+    <div class="subtitle">Auto-évaluation inspirée des instruments cliniques (AQ-50, RAADS-R, EQ, SQ, CAT-Q)</div>
+  </header>
+
+  <!-- INTRO -->
+  <div id="screen-intro" class="panel">
+    <h2 style="margin-top:0">Avant de commencer</h2>
+    <p>Ce questionnaire explore huit dimensions neurocognitives associées au <strong>trouble du spectre de l'autisme (TSA)</strong> :</p>
+    <ul>
+      <li><strong>Cognition sociale</strong> et théorie de l'esprit</li>
+      <li><strong>Communication pragmatique</strong> et langage non verbal</li>
+      <li><strong>Traitement sensoriel</strong> (hyper/hyposensibilité)</li>
+      <li><strong>Flexibilité cognitive</strong> et fonctions exécutives</li>
+      <li><strong>Comportements répétitifs</strong> et besoin de routine</li>
+      <li><strong>Intérêts spécifiques</strong> et systémisation</li>
+      <li><strong>Régulation émotionnelle</strong> et alexithymie</li>
+      <li><strong>Camouflage social</strong> (masking)</li>
+    </ul>
+    <div class="disclaimer">
+      <strong>⚠ Important :</strong> ce test n'est <u>pas</u> un diagnostic. Il s'agit d'un outil de sensibilisation à visée indicative. Un diagnostic de TSA ne peut être posé que par un professionnel de santé qualifié (psychiatre, neuropsychologue) à l'issue d'une évaluation multidisciplinaire (ADI-R, ADOS-2, entretien clinique, observation). Si les résultats résonnent avec votre vécu, parlez-en à un professionnel.
+    </div>
+    <div class="demographics">
+      <div class="field">
+        <label for="age">Âge</label>
+        <input type="number" id="age" min="10" max="120" placeholder="ex. 28" />
+      </div>
+      <div class="field">
+        <label for="sex">Sexe assigné à la naissance</label>
+        <select id="sex">
+          <option value="">—</option>
+          <option value="f">Féminin</option>
+          <option value="m">Masculin</option>
+          <option value="o">Autre / Non précisé</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="prior">Diagnostic antérieur de TSA ?</label>
+        <select id="prior">
+          <option value="no">Non</option>
+          <option value="suspected">Suspecté / en cours</option>
+          <option value="yes">Oui</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="family">TSA chez un·e proche ?</label>
+        <select id="family">
+          <option value="no">Non / Inconnu</option>
+          <option value="yes">Oui</option>
+        </select>
+      </div>
+    </div>
+    <div class="nav">
+      <span></span>
+      <button class="primary" onclick="startTest()">Commencer le questionnaire →</button>
+    </div>
+    <div class="keyboard-hint">Astuce : utilisez les touches <kbd>1</kbd>–<kbd>5</kbd> pour répondre et <kbd>←</kbd>/<kbd>→</kbd> pour naviguer.</div>
+  </div>
+
+  <!-- QUESTION -->
+  <div id="screen-question" class="panel hidden">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-text" id="progress-text">0 / 0</div>
+    </div>
+    <div class="dimension-tag" id="dimension-tag"></div>
+    <div class="question-text" id="question-text"></div>
+    <div class="likert" id="likert"></div>
+    <div class="nav">
+      <button id="btn-prev" onclick="prevQuestion()">← Précédent</button>
+      <button id="btn-next" class="primary" onclick="nextQuestion()">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="screen-results" class="panel hidden">
+    <div class="results-header">
+      <div class="muted">Score global (traits du spectre autistique)</div>
+      <div class="global-score" id="global-score">—</div>
+      <div id="tranche-label" class="tranche">—</div>
+      <div class="muted" id="percentile-text"></div>
+    </div>
+
+    <div class="radar-wrap">
+      <canvas id="radar" width="480" height="480"></canvas>
+    </div>
+
+    <div class="dimensions-grid" id="dimensions-grid"></div>
+
+    <div class="interpretation" id="interpretation"></div>
+
+    <div class="disclaimer" style="margin-top:20px">
+      Rappel : ce résultat n'est pas un diagnostic. Si votre score est élevé et que ces traits ont un impact significatif sur votre quotidien (travail, relations, santé mentale), il peut être utile d'en parler à un professionnel spécialisé dans les troubles du neurodéveloppement adulte.
+    </div>
+
+    <div class="nav">
+      <button onclick="restart()">Recommencer</button>
+      <button class="primary" onclick="exportJSON()">Exporter mes réponses (JSON)</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   QUESTIONNAIRE — 72 items répartis sur 8 dimensions
+   Inspiré de AQ-50 (Baron-Cohen), RAADS-R (Ritvo),
+   EQ/SQ, CAT-Q (Hull), GSQ (Robertson).
+   reverse: true = score inversé (accord = moins de traits TSA)
+   ============================================================ */
+const QUESTIONS = [
+  // --- 1. COGNITION SOCIALE / THÉORIE DE L'ESPRIT ---
+  { d: "social", text: "J'ai du mal à deviner ce qu'une autre personne pense ou ressent simplement en la regardant.", reverse: false },
+  { d: "social", text: "Dans une conversation de groupe, je sais facilement quand c'est à mon tour de parler.", reverse: true },
+  { d: "social", text: "Je perçois rapidement lorsque quelqu'un se sent mal à l'aise, même s'il ne le dit pas.", reverse: true },
+  { d: "social", text: "Les règles sociales implicites (ce qu'il faut faire ou ne pas faire) me paraissent souvent arbitraires ou incompréhensibles.", reverse: false },
+  { d: "social", text: "J'ai du mal à maintenir un contact visuel soutenu lors d'une conversation.", reverse: false },
+  { d: "social", text: "Je comprends facilement le sarcasme, l'ironie ou le second degré au moment où ils sont dits.", reverse: true },
+  { d: "social", text: "Je préfère les interactions en tête-à-tête aux situations sociales de groupe.", reverse: false },
+  { d: "social", text: "Lors des fêtes ou rassemblements, je me sens rapidement épuisé·e et j'ai besoin de m'isoler.", reverse: false },
+  { d: "social", text: "Je trouve les relations amicales et romantiques plutôt intuitives à naviguer.", reverse: true },
+
+  // --- 2. COMMUNICATION PRAGMATIQUE ---
+  { d: "comm", text: "Les autres me disent parfois que je parle sur un ton monocorde, trop formel ou inhabituel.", reverse: false },
+  { d: "comm", text: "Quand je parle d'un sujet qui m'intéresse, j'ai du mal à remarquer que mon interlocuteur s'ennuie.", reverse: false },
+  { d: "comm", text: "J'utilise spontanément des gestes, expressions faciales et mimiques en parlant.", reverse: true },
+  { d: "comm", text: "Je prends les expressions ou métaphores au pied de la lettre avant de comprendre leur sens figuré.", reverse: false },
+  { d: "comm", text: "Je préfère les conversations factuelles (données, idées, systèmes) aux bavardages sociaux (small talk).", reverse: false },
+  { d: "comm", text: "Il m'arrive de ne pas savoir comment engager ou clore une conversation naturellement.", reverse: false },
+  { d: "comm", text: "Je perçois bien les changements subtils dans le ton de voix ou la posture des autres.", reverse: true },
+  { d: "comm", text: "J'ai tendance à interrompre les autres ou à répondre à côté sans le réaliser sur le moment.", reverse: false },
+
+  // --- 3. TRAITEMENT SENSORIEL ---
+  { d: "sensory", text: "Certains sons (bruits de fond, néons, foule) m'irritent ou me submergent beaucoup plus que la moyenne des gens.", reverse: false },
+  { d: "sensory", text: "Les étiquettes de vêtements, coutures ou textures de tissus me dérangent physiquement.", reverse: false },
+  { d: "sensory", text: "Les lumières vives, scintillantes ou fluorescentes me fatiguent rapidement.", reverse: false },
+  { d: "sensory", text: "J'ai une aversion marquée pour certaines textures ou températures alimentaires.", reverse: false },
+  { d: "sensory", text: "Les odeurs (parfums, produits d'entretien, nourriture) me perturbent plus que les autres ne semblent l'être.", reverse: false },
+  { d: "sensory", text: "Dans un environnement bruyant, j'ai beaucoup de mal à suivre une conversation.", reverse: false },
+  { d: "sensory", text: "Je recherche certaines stimulations sensorielles (pression profonde, balancement, textures particulières).", reverse: false },
+  { d: "sensory", text: "Je remarque des détails sensoriels (bruits, motifs) que les autres ignorent complètement.", reverse: false },
+  { d: "sensory", text: "Après une journée chargée en stimuli, j'ai besoin d'une longue période de récupération au calme.", reverse: false },
+
+  // --- 4. FLEXIBILITÉ COGNITIVE / EXÉCUTIVE ---
+  { d: "exec", text: "Les changements imprévus dans mes plans me déstabilisent beaucoup, même s'ils sont mineurs.", reverse: false },
+  { d: "exec", text: "J'ai du mal à passer d'une tâche à une autre, surtout quand je suis absorbé·e.", reverse: false },
+  { d: "exec", text: "Je m'adapte facilement à de nouvelles situations ou environnements.", reverse: true },
+  { d: "exec", text: "Initier une tâche que je dois faire, même simple, peut me demander un effort disproportionné.", reverse: false },
+  { d: "exec", text: "J'ai tendance à procrastiner ou à basculer dans l'hyperfocus, sans juste milieu.", reverse: false },
+  { d: "exec", text: "La gestion du temps, des priorités et des échéances est l'une de mes difficultés récurrentes.", reverse: false },
+  { d: "exec", text: "Je pense de façon rigide en termes de « vrai/faux » ou « juste/injuste », avec peu de nuances.", reverse: false },
+
+  // --- 5. COMPORTEMENTS RÉPÉTITIFS / ROUTINES ---
+  { d: "repet", text: "J'ai des routines précises (matin, repas, travail) et leur rupture me cause un inconfort notable.", reverse: false },
+  { d: "repet", text: "Je me livre à des mouvements répétitifs apaisants (balancement, tapotement, torsion des doigts, stimming).", reverse: false },
+  { d: "repet", text: "Je suis attaché·e à certains objets, vêtements ou parcours familiers.", reverse: false },
+  { d: "repet", text: "Je trouve du réconfort à faire ou regarder la même chose en boucle (même film, mêmes musiques, mêmes itinéraires).", reverse: false },
+  { d: "repet", text: "Je remarque immédiatement quand un objet familier a été déplacé ou qu'un détail a changé.", reverse: false },
+  { d: "repet", text: "J'apprécie la spontanéité et les surprises dans ma vie quotidienne.", reverse: true },
+
+  // --- 6. INTÉRÊTS SPÉCIFIQUES / SYSTÉMISATION ---
+  { d: "sys", text: "J'ai (ou j'ai eu) un ou plusieurs sujets d'intérêt intense auxquels je consacre un temps considérable.", reverse: false },
+  { d: "sys", text: "Je prends plaisir à collectionner, classer, ordonner ou cataloguer des éléments.", reverse: false },
+  { d: "sys", text: "J'aime comprendre le fonctionnement d'un système (machine, logiciel, règle, langue) dans ses moindres détails.", reverse: false },
+  { d: "sys", text: "Je peux passer des heures à apprendre sur un sujet précis en oubliant manger ou dormir.", reverse: false },
+  { d: "sys", text: "Je remarque des régularités, motifs ou anomalies que les autres ne voient pas.", reverse: false },
+  { d: "sys", text: "Je préfère des domaines structurés et prévisibles (maths, code, sciences, musique, droit) aux domaines flous.", reverse: false },
+  { d: "sys", text: "J'aime lire ou apprendre sur des sujets de niche que peu de gens connaissent.", reverse: false },
+
+  // --- 7. RÉGULATION ÉMOTIONNELLE / ALEXITHYMIE ---
+  { d: "emo", text: "Il m'est difficile de nommer précisément l'émotion que je ressens à un moment donné.", reverse: false },
+  { d: "emo", text: "Je perçois mes émotions d'abord par des sensations physiques (nœud au ventre, tension, chaleur) avant de les identifier.", reverse: false },
+  { d: "emo", text: "Mes émotions peuvent passer du calme à une intensité très forte de manière soudaine.", reverse: false },
+  { d: "emo", text: "Il m'arrive de « bloquer » (shutdown) ou d'exploser (meltdown) face à une surcharge, sans pouvoir le contrôler.", reverse: false },
+  { d: "emo", text: "Quand quelqu'un me décrit un problème émotionnel, je peine à savoir quoi répondre spontanément.", reverse: false },
+  { d: "emo", text: "Je comprends facilement mes propres motivations et émotions.", reverse: true },
+  { d: "emo", text: "Les conflits interpersonnels me bouleversent longtemps et sont difficiles à « évacuer ».", reverse: false },
+  { d: "emo", text: "Je vis de l'anxiété sociale (avant, pendant ou après des interactions) qui m'épuise.", reverse: false },
+
+  // --- 8. CAMOUFLAGE / MASKING (CAT-Q) ---
+  { d: "mask", text: "Je prépare mentalement (voire répète) les conversations avant un événement social.", reverse: false },
+  { d: "mask", text: "J'observe et j'imite consciemment les expressions faciales ou gestes des autres pour paraître « normal·e ».", reverse: false },
+  { d: "mask", text: "J'ai une « version sociale » de moi-même qui est différente de qui je suis vraiment seul·e.", reverse: false },
+  { d: "mask", text: "Après un événement social, je suis épuisé·e d'avoir dû gérer mon comportement et mes réactions.", reverse: false },
+  { d: "mask", text: "J'ai étudié les règles sociales comme on étudie une matière pour m'y conformer.", reverse: false },
+  { d: "mask", text: "Je force des comportements (contact visuel, sourires, ton enjoué) qui ne sont pas naturels pour moi.", reverse: false },
+  { d: "mask", text: "Je ressens régulièrement un décalage entre mon apparence sociale et mon vécu intérieur.", reverse: false },
+
+  // --- Items complémentaires couvrant plusieurs dimensions (RAADS-R like) ---
+  { d: "social", text: "J'ai eu davantage de difficultés que mes pairs à me faire des ami·e·s durables dans l'enfance ou l'adolescence.", reverse: false },
+  { d: "social", text: "Je ressens un besoin fort de solitude pour « me recharger » après toute interaction.", reverse: false },
+  { d: "comm", text: "J'utilise parfois des mots inhabituels, précis ou « techniques » dans la conversation courante.", reverse: false },
+  { d: "exec", text: "Je pense souvent en images, en systèmes ou en catégories plutôt qu'en mots.", reverse: false },
+  { d: "sensory", text: "Je ressens la douleur, la chaleur ou le froid différemment de la plupart des gens (plus ou moins fortement).", reverse: false },
+  { d: "repet", text: "Enfant, j'avais des jeux très structurés (aligner, classer, faire tourner des objets) plutôt que des jeux imaginatifs partagés.", reverse: false },
+  { d: "sys", text: "Je cherche activement des explications logiques ou mécaniques aux comportements humains.", reverse: false },
+  { d: "emo", text: "L'empathie cognitive (comprendre ce que ressent l'autre) est plus difficile pour moi que l'empathie affective (ressentir avec lui).", reverse: false },
+  { d: "mask", text: "On m'a déjà dit que je semblais « bizarre », « décalé·e », « trop intense » ou « trop formel·le ».", reverse: false },
+  { d: "social", text: "J'ai du mal à suivre une conversation quand plusieurs personnes parlent en même temps.", reverse: false },
+  { d: "exec", text: "J'ai besoin de listes, plannings ou systèmes externes pour gérer mon quotidien.", reverse: false },
+  { d: "comm", text: "Je préfère communiquer par écrit (mail, chat) que par téléphone ou en face-à-face.", reverse: false }
+];
+
+const DIMENSIONS = {
+  social:  { label: "Cognition sociale",        color: "#5eb3ff", neuro: "Théorie de l'esprit — jonction temporo-pariétale, cortex préfrontal médian, système des neurones miroirs." },
+  comm:    { label: "Communication pragmatique", color: "#9d7cff", neuro: "Pragmatique et prosodie — hémisphère droit, sillon temporal supérieur." },
+  sensory: { label: "Traitement sensoriel",      color: "#f472b6", neuro: "Filtrage sensoriel — cortex sensoriels primaires hyperconnectés, thalamus." },
+  exec:    { label: "Flexibilité cognitive",     color: "#fbbf24", neuro: "Fonctions exécutives — cortex préfrontal dorsolatéral, cortex cingulaire antérieur." },
+  repet:   { label: "Routines & répétition",     color: "#fb923c", neuro: "Circuit des ganglions de la base, striatum, boucles cortico-striato-thalamiques." },
+  sys:     { label: "Systémisation & intérêts",  color: "#4ade80", neuro: "Préférence pour les systèmes règles-basés — cortex pariétal, réseau attentionnel dorsal." },
+  emo:     { label: "Régulation émotionnelle",   color: "#22d3ee", neuro: "Alexithymie — insula antérieure, cortex cingulaire, amygdale." },
+  mask:    { label: "Camouflage social",         color: "#e879f9", neuro: "Coût cognitif du masking — associé à burnout autistique et dépression." }
+};
+
+const LIKERT_LABELS = [
+  "Tout à fait en désaccord",
+  "Plutôt en désaccord",
+  "Neutre / Ne sais pas",
+  "Plutôt d'accord",
+  "Tout à fait d'accord"
+];
+
+/* Shuffle for better experience but keep reproducible — we'll actually keep order to preserve dimension coverage */
+let currentQ = 0;
+const answers = new Array(QUESTIONS.length).fill(null);
+let demo = {};
+
+function startTest() {
+  demo = {
+    age: document.getElementById("age").value || null,
+    sex: document.getElementById("sex").value || null,
+    prior: document.getElementById("prior").value,
+    family: document.getElementById("family").value
+  };
+  document.getElementById("screen-intro").classList.add("hidden");
+  document.getElementById("screen-question").classList.remove("hidden");
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  document.getElementById("dimension-tag").textContent = DIMENSIONS[q.d].label;
+  document.getElementById("dimension-tag").style.color = DIMENSIONS[q.d].color;
+  document.getElementById("dimension-tag").style.background = DIMENSIONS[q.d].color + "1a";
+  document.getElementById("question-text").textContent = q.text;
+  const likert = document.getElementById("likert");
+  likert.innerHTML = "";
+  for (let i = 0; i < 5; i++) {
+    const opt = document.createElement("div");
+    opt.className = "likert-option" + (answers[currentQ] === i ? " selected" : "");
+    opt.innerHTML = `<span class="dot"></span><span>${i+1}. ${LIKERT_LABELS[i]}</span>`;
+    opt.onclick = () => selectAnswer(i);
+    likert.appendChild(opt);
+  }
+  const pct = ((currentQ) / QUESTIONS.length) * 100;
+  document.getElementById("progress-fill").style.width = pct + "%";
+  document.getElementById("progress-text").textContent = `${currentQ + 1} / ${QUESTIONS.length}`;
+  document.getElementById("btn-prev").disabled = currentQ === 0;
+  document.getElementById("btn-next").textContent = currentQ === QUESTIONS.length - 1 ? "Voir mes résultats →" : "Suivant →";
+  document.getElementById("btn-next").disabled = answers[currentQ] === null;
+}
+
+function selectAnswer(i) {
+  answers[currentQ] = i;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  if (answers[currentQ] === null) return;
+  if (currentQ === QUESTIONS.length - 1) {
+    showResults();
+  } else {
+    currentQ++;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+// Keyboard shortcuts
+document.addEventListener("keydown", (e) => {
+  if (document.getElementById("screen-question").classList.contains("hidden")) return;
+  if (e.key >= "1" && e.key <= "5") {
+    selectAnswer(parseInt(e.key) - 1);
+    setTimeout(() => nextQuestion(), 180);
+  } else if (e.key === "ArrowRight") {
+    nextQuestion();
+  } else if (e.key === "ArrowLeft") {
+    prevQuestion();
+  }
+});
+
+/* ============================================================
+   SCORING
+   - Each item: 0..4 (from Likert 1..5)
+   - If reverse: score = 4 - raw
+   - Per-dimension: mean as percentage 0..100
+   - Global: weighted average of dimensions (normalized)
+   ============================================================ */
+function computeScores() {
+  const byDim = {};
+  for (const key of Object.keys(DIMENSIONS)) byDim[key] = { sum: 0, n: 0 };
+  QUESTIONS.forEach((q, idx) => {
+    let raw = answers[idx];
+    if (q.reverse) raw = 4 - raw;
+    byDim[q.d].sum += raw;
+    byDim[q.d].n += 1;
+  });
+  const dimScores = {};
+  for (const k of Object.keys(byDim)) {
+    dimScores[k] = Math.round((byDim[k].sum / (byDim[k].n * 4)) * 100);
+  }
+  const globalScore = Math.round(
+    Object.values(dimScores).reduce((a, b) => a + b, 0) / Object.keys(dimScores).length
+  );
+  return { dimScores, globalScore };
+}
+
+function getTranche(score) {
+  if (score < 25)  return { key: "low",  label: "Traits très faibles — profil neurotypique probable",
+    cls: "low", desc: "Vos réponses situent vos traits autistiques en dessous du seuil qu'on observerait dans la population générale. Un profil TSA paraît peu probable sur la base de ce questionnaire." };
+  if (score < 40)  return { key: "sub",  label: "Traits subcliniques — dans la variabilité neurotypique",
+    cls: "low", desc: "Vous présentez quelques traits qu'on peut retrouver sur le spectre autistique, mais qui restent dans la variabilité habituelle. Ces traits ne sont probablement pas problématiques au quotidien." };
+  if (score < 55)  return { key: "mod",  label: "Traits modérés — profil « large phénotype »",
+    cls: "mid", desc: "Vous présentez un nombre notable de traits du spectre autistique sans atteindre le seuil clinique. On parle parfois de « broad autism phenotype » (BAP). Ces traits peuvent colorer votre manière d'être sans constituer un trouble." };
+  if (score < 70)  return { key: "high", label: "Traits élevés — évaluation clinique recommandée",
+    cls: "high", desc: "Votre score est compatible avec un profil TSA. De nombreuses personnes ayant ce niveau de traits bénéficient d'une évaluation diagnostique formelle, notamment si ces traits ont un impact fonctionnel (travail, relations, santé mentale, épuisement)." };
+  return { key: "vhigh", label: "Traits très élevés — fortement évocateur d'un TSA",
+    cls: "high", desc: "Votre score est très élevé et très cohérent avec un profil du spectre autistique. Une évaluation par un·e neuropsychologue ou psychiatre spécialisé·e dans le neurodéveloppement adulte est vivement recommandée. Un diagnostic, quand il résonne, peut offrir des clés de compréhension, des aménagements et réduire le coût du camouflage." };
+}
+
+function showResults() {
+  document.getElementById("screen-question").classList.add("hidden");
+  document.getElementById("screen-results").classList.remove("hidden");
+  const { dimScores, globalScore } = computeScores();
+  document.getElementById("global-score").textContent = globalScore + " / 100";
+  const tr = getTranche(globalScore);
+  const trancheEl = document.getElementById("tranche-label");
+  trancheEl.textContent = tr.label;
+  trancheEl.className = "tranche " + tr.cls;
+  document.getElementById("interpretation").innerHTML =
+    `<strong>Interprétation :</strong> ${tr.desc}` +
+    (demo.sex === "f" ? `<br/><br/><em>Note :</em> les profils féminins du TSA sont sous-diagnostiqués. Le camouflage social y est souvent plus élevé, ce qui peut masquer les traits aux yeux des proches et des cliniciens non formés.` : ``);
+
+  // Percentile estimate vs general-population approximation
+  // Rough normal curve centered at ~30 (non-autistic mean on AQ-like scales, normalized).
+  const mu = 30, sigma = 12;
+  const z = (globalScore - mu) / sigma;
+  const percentile = Math.round(100 * normalCDF(z));
+  document.getElementById("percentile-text").textContent =
+    `≈ ${percentile}ᵉ percentile estimé par rapport à la population générale.`;
+
+  // Dim cards
+  const grid = document.getElementById("dimensions-grid");
+  grid.innerHTML = "";
+  for (const key of Object.keys(DIMENSIONS)) {
+    const d = DIMENSIONS[key];
+    const s = dimScores[key];
+    const card = document.createElement("div");
+    card.className = "dim-card";
+    card.innerHTML = `
+      <div class="dim-name" style="color:${d.color}">${d.label}</div>
+      <div class="dim-score">${s} / 100</div>
+      <div class="dim-bar"><div class="dim-fill" style="width:${s}%;background:${d.color}"></div></div>
+      <div class="muted" style="margin-top:8px;font-size:0.78rem">${d.neuro}</div>
+    `;
+    grid.appendChild(card);
+  }
+
+  drawRadar(dimScores);
+}
+
+/* Gaussian CDF approximation (Abramowitz & Stegun 26.2.17) */
+function normalCDF(z) {
+  const a1 =  0.254829592, a2 = -0.284496736, a3 =  1.421413741,
+        a4 = -1.453152027, a5 =  1.061405429, p  =  0.3275911;
+  const sign = z < 0 ? -1 : 1;
+  z = Math.abs(z) / Math.SQRT2;
+  const t = 1.0 / (1.0 + p * z);
+  const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-z * z);
+  return 0.5 * (1.0 + sign * y);
+}
+
+/* ============================================================
+   RADAR CHART (pure canvas)
+   ============================================================ */
+function drawRadar(scores) {
+  const canvas = document.getElementById("radar");
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  const R = Math.min(W, H) / 2 - 70;
+  ctx.clearRect(0, 0, W, H);
+  const keys = Object.keys(DIMENSIONS);
+  const n = keys.length;
+
+  // Grid rings
+  ctx.strokeStyle = "#2d3542";
+  ctx.lineWidth = 1;
+  for (let r = 1; r <= 5; r++) {
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+      const x = cx + Math.cos(a) * R * (r / 5);
+      const y = cy + Math.sin(a) * R * (r / 5);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  // Axes
+  ctx.strokeStyle = "#2d3542";
+  for (let i = 0; i < n; i++) {
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R);
+    ctx.stroke();
+  }
+
+  // Data polygon
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const k = keys[i];
+    const v = scores[k] / 100;
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    const x = cx + Math.cos(a) * R * v;
+    const y = cy + Math.sin(a) * R * v;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0, 0, W, H);
+  grad.addColorStop(0, "rgba(94,179,255,0.45)");
+  grad.addColorStop(1, "rgba(157,124,255,0.45)");
+  ctx.fillStyle = grad;
+  ctx.strokeStyle = "#9d7cff";
+  ctx.lineWidth = 2;
+  ctx.fill();
+  ctx.stroke();
+
+  // Points
+  for (let i = 0; i < n; i++) {
+    const k = keys[i];
+    const v = scores[k] / 100;
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    const x = cx + Math.cos(a) * R * v;
+    const y = cy + Math.sin(a) * R * v;
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = DIMENSIONS[k].color;
+    ctx.fill();
+  }
+
+  // Labels
+  ctx.fillStyle = "#d4dae3";
+  ctx.font = "600 12px -apple-system, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (let i = 0; i < n; i++) {
+    const k = keys[i];
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    const x = cx + Math.cos(a) * (R + 34);
+    const y = cy + Math.sin(a) * (R + 22);
+    const words = DIMENSIONS[k].label.split(" ");
+    const mid = Math.ceil(words.length / 2);
+    ctx.fillStyle = DIMENSIONS[k].color;
+    ctx.fillText(words.slice(0, mid).join(" "), x, y - 7);
+    if (words.length > mid) ctx.fillText(words.slice(mid).join(" "), x, y + 7);
+  }
+}
+
+function restart() {
+  currentQ = 0;
+  for (let i = 0; i < answers.length; i++) answers[i] = null;
+  document.getElementById("screen-results").classList.add("hidden");
+  document.getElementById("screen-intro").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function exportJSON() {
+  const { dimScores, globalScore } = computeScores();
+  const payload = {
+    date: new Date().toISOString(),
+    demographics: demo,
+    answers: QUESTIONS.map((q, i) => ({
+      dimension: q.d,
+      question: q.text,
+      reverse: q.reverse,
+      rawLikert: answers[i] + 1,
+      scored: q.reverse ? 4 - answers[i] : answers[i]
+    })),
+    dimensionScores: dimScores,
+    globalScore,
+    tranche: getTranche(globalScore).label,
+    disclaimer: "Auto-évaluation — ne constitue pas un diagnostic."
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `evaluation-tsa-${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
