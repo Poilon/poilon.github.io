@@ -570,6 +570,31 @@ h6 {
     border-color: rgba(255, 173, 66, 0.25);
 }
 
+.case-logo--magical {
+    background: #fff;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.case-logo--firmly {
+    background: #fff;
+    border-color: rgba(245, 197, 26, 0.35);
+    width: 56px;
+    padding: 0.4rem;
+}
+
+.case-logo--magimail {
+    background: linear-gradient(135deg, #0b1020, #1a1240);
+    border-color: rgba(167, 139, 250, 0.4);
+    width: 56px;
+    padding: 0.4rem;
+}
+
+.case-highlight--mini {
+    margin-top: 1.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.4rem;
+}
+
 .case-logo img {
     max-height: 42px;
     max-width: 100%;
