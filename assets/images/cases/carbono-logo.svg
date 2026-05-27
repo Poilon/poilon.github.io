@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+  <g>
+    <circle cx="20" cy="20" r="14" fill="#0fd999"/>
+    <path d="M14 22c0-4 3-7 7-7 2.4 0 4.5 1.2 5.7 3" stroke="#0b0a2b" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+    <circle cx="20" cy="20" r="1.8" fill="#0b0a2b"/>
+  </g>
+  <text x="42" y="27" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="20" fill="#0b0a2b" letter-spacing="-0.5">Carbono</text>
+</svg>

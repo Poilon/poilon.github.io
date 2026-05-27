@@ -589,6 +589,12 @@ h6 {
     padding: 0.4rem;
 }
 
+.case-logo--carbono {
+    background: #fff;
+    border-color: rgba(15, 217, 153, 0.35);
+    width: 140px;
+}
+
 .case-highlight--mini {
     margin-top: 1.8rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
