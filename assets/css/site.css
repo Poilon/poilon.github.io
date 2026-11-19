@@ -595,6 +595,25 @@ h6 {
     width: 140px;
 }
 
+.case-logo--poum {
+    background: #542b43;
+    border-color: rgba(237, 170, 132, 0.45);
+    width: 56px;
+    padding: 0.4rem;
+}
+
+.case-logo--carabin {
+    background: #fff;
+    border-color: rgba(10, 100, 120, 0.35);
+    width: 56px;
+    padding: 0.3rem;
+}
+
+.case-highlight--duo {
+    margin-top: 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+}
+
 .case-highlight--mini {
     margin-top: 1.8rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
